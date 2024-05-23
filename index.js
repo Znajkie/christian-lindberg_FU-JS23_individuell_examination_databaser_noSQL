@@ -33,3 +33,17 @@ app.post('/users', async (req,res) => {
         res.status(400).send(error);
     }
 });
+
+//Read
+app.get('/users', async (req,res) => {
+    try {
+        const users = await User.find()
+        if(!users) {
+            res.status(400).send('no user found')
+            return
+        }
+        res.status(200).send(users)
+    }catch {
+        res.status(500).send(error);
+    }
+})
