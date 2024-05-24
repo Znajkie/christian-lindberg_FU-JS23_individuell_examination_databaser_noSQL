@@ -12,7 +12,7 @@ exports.createUser = async (req, res) => {
   }
 };
 
-// Read all users
+// Get all users
 exports.getAllUsers = async (req, res) => {
   try {
     const users = await User.find();
