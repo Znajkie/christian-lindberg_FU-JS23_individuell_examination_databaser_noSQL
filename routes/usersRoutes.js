@@ -1,9 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/usersControllers');
+const { auth } = require('../utils/auth');
 
 // Create user
-router.post('/', userController.createUser);
+router.post('/register', userController.createUser);
+
+// Login user / admin
+router.post('/login', userController.loginUser);
+
+// Adding auth with JWT to all requests except register and login.
+router.use(auth);
 
 // Read all users
 router.get('/', userController.getAllUsers);

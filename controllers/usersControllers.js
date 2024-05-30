@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const User = require('../models/userSchema');
+const jwt = require('jsonwebtoken');
 
 // Create user
 exports.createUser = async (req, res) => {
@@ -12,7 +13,32 @@ exports.createUser = async (req, res) => {
   }
 };
 
-// Get all users
+exports.loginUser = async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    // Find the user with the provided username
+    const user = await User.findOne({ username: username });
+    if (!user) {
+      return res
+        .status(401)
+        .json({ success: false, message: 'Invalid username' });
+    }
+    console.log(username);
+    // Generate JWT token
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, {
+      expiresIn: '1h',
+    });
+
+    // Send the token back in the response
+    res.status(200).json({ success: true, token });
+  } catch (error) {
+    console.error('Error during login:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+}
+
+//* Get all users
 exports.getAllUsers = async (req, res) => {
   try {
     const users = await User.find();
@@ -26,7 +52,7 @@ exports.getAllUsers = async (req, res) => {
   }
 };
 
-// Get user by ID
+//* Get user by ID
 exports.getUserById = async (req, res) => {
   try {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
@@ -46,10 +72,10 @@ exports.getUserById = async (req, res) => {
   }
 };
 
-// Update user
+//* Update user
 exports.updateUser = async (req, res) => {
   const updates = Object.keys(req.body);
-  const allowedUpdates = ['name', 'age', 'email'];
+  const allowedUpdates = ['username', 'password', 'email'];
   const isValidKeys = updates.every((update) =>
     allowedUpdates.includes(update)
   );
@@ -72,7 +98,7 @@ exports.updateUser = async (req, res) => {
   }
 };
 
-// Delete user
+//* Delete user
 exports.deleteUser = async (req, res) => {
   try {
     const user = await User.findByIdAndDelete(req.params.id);
