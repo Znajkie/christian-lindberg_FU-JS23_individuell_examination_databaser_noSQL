@@ -15,11 +15,11 @@ router.delete('/:id', isAdmin, moviesController.deleteMovie);
 // Get all movies
 router.get('/', moviesController.getAllMovies);
 
+// Get average of all the ratings on all movies.
 router.get('/ratings', moviesController.getAverageMovieRatings);
 
 // GET /movies/:id
 router.get('/:id', moviesController.getMovieById);
-
 
 // GET /movies/:id/reviews: Hämta alla recensioner för en specifik film.
 router.get('/:id/reviews', moviesController.getReviewsForTheMovie);

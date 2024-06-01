@@ -8,10 +8,10 @@ const isAdmin = async (req, res, next) => {
 
   try {
     const user = await User.findById(userId);
-    if (!user || user.role != 'admin')
-      res.status(403).send('Forbidden');
-      next()
-      
+    if (!user || user.role != 'admin') {
+    return res.status(403).send('Forbidden');
+    }
+    next()
   } catch (error) {
     res.status(500).send('Server error');
   }

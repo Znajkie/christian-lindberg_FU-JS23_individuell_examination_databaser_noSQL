@@ -7,7 +7,10 @@ const postMovie = async (req, res) => {
   try {
     const newMovie = new Movie(req.body);
     await newMovie.save();
-    res.status(201).send(newMovie);
+    res.status(201).send({
+      message: 'Created:',
+      movie: newMovie,
+    });
   } catch (error) {
     res.status(400).send(error.message);
   }
@@ -23,7 +26,10 @@ const updateMovie = async (req, res) => {
     if (!movie) {
       return res.status(404).send();
     }
-    res.send(movie);
+      res.send({
+        message: 'Updated:',
+        movie: movie,
+      });
   } catch (error) {
     res.status(400).send(error);
   }
@@ -36,7 +42,9 @@ const deleteMovie = async (req, res) => {
     if (!movie) {
       return res.status(404).send();
     }
-    res.send(movie);
+    res.send({
+      message: 'Deleted:',
+      movie: movie});
   } catch (error) {
     res.status(400).send(error);
   }

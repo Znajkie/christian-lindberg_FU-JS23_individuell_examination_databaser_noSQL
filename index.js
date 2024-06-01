@@ -13,9 +13,8 @@ const MONGO_URL = process.env.MONGO_URL;
 
 app.use('/reviews', auth, reviewsRoutes);
 app.use('/movies', auth, moviesRoutes);
+// Auth is applied for some userRoutes, see userRoutes.
 app.use('/', userRoutes);
-
-
 
 app.listen(process.env.PORT, () => {
   console.log(`server runs on ${process.env.PORT}`);

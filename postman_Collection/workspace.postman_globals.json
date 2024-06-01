@@ -1,0 +1,19 @@
+{
+	"id": "b5568a87-bf5d-422e-8f16-35e42dc68b8c",
+	"values": [
+		{
+			"key": "url",
+			"value": "http://localhost:3000",
+			"enabled": true
+		},
+		{
+			"key": "JWT",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjU4NTIxMDM0NTdlZTMzYmQ1NTBlMTUiLCJpYXQiOjE3MTcyMjYyODAsImV4cCI6MTcxNzIzNzA4MH0.FhXxp0ieA8sYL_HApAtaI7LSOkdyWz_vP3e2jUpLMEQ",
+			"enabled": true
+		}
+	],
+	"name": "Globals",
+	"_postman_variable_scope": "globals",
+	"_postman_exported_at": "2024-06-01T07:25:55.079Z",
+	"_postman_exported_using": "Postman/11.1.14"
+}

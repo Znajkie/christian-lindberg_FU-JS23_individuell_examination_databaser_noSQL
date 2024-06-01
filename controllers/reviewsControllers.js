@@ -23,12 +23,16 @@ exports.postReview = async (req, res) => {
     const newReview = new Review({
       movieId,
       userId,
+      reviewer: user.username,
       rating,
       comment,
     });
 
     await newReview.save();
-    res.status(201).send(newReview);
+    res.status(201).send({
+      message: `Created: ${movie.title}`,
+      movie: newReview,
+    });
   } catch (error) {
     res.status(400).send(error.message);
   }
