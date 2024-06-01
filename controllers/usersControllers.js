@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const User = require('../models/userSchema');
 const jwt = require('jsonwebtoken');
 
-// Create user
+//* Create user
 exports.createUser = async (req, res) => {
   try {
     const user = new User(req.body);
@@ -17,20 +17,16 @@ exports.loginUser = async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    // Find the user with the provided username
     const user = await User.findOne({ username: username });
     if (!user) {
       return res
         .status(401)
         .json({ success: false, message: 'Invalid username' });
     }
-    console.log(username);
-    // Generate JWT token
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, {
       expiresIn: '3h',
     });
 
-    // Send the token back in the response
     res.status(200).json({ success: true, token });
   } catch (error) {
     console.error('Error during login:', error);

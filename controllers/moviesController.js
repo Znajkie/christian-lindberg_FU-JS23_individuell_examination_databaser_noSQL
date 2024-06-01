@@ -83,7 +83,7 @@ const getMovieById = async (req, res) => {
     res.status(500).send(error.message);
   }
 };
-// GET revies for a movie by ID
+//* GET revies for a movie by ID
 const getReviewsForTheMovie = async (req, res) => {
   try {
     const movieId = req.params.id;
@@ -105,7 +105,7 @@ const getReviewsForTheMovie = async (req, res) => {
   }
 };
 
-
+//* GET average ratings from all movies
 const getAverageMovieRatings = async (req, res) => {
   try {
     const moviesWithRatings = await Movie.aggregate([
